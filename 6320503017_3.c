@@ -2,12 +2,12 @@
 int main()
 {
 
-    int size[3],check[3]= {0,0,0},i,j,k,sum[4]={0,0,0,0},num[3][20][20],a=0;
+    int size[3],check[3]= {0,0,0},i,j,k,sum[4]= {0,0,0,0},num[3][20][20],a=0;
     for(i=0; i<3; i++)
     {
         scanf("%d",&size[i]);
     }
-    printf("\n");
+
 
     for(i=0; i<3; i++)
     {
@@ -18,10 +18,12 @@ int main()
                 scanf("%d",&num[i][j][k]);
             }
         }
-        printf("\n");
+
     }
     for(i=0; i<3; i++)
-    {   sum[0]=0;
+    {
+
+        sum[0]=0;
         sum[1]=0;
         sum[2]=0;
         sum[3]=0;
@@ -33,67 +35,81 @@ int main()
 
         }
         a++;
-
-        for(j=0,k=size[i]-1; j<size[i]; k--,j++)//ทแยงซ้าย
+        if(check[i]!=1)
         {
-            sum[a]+=num[i][j][k];
 
-        }
-
-
-
-        if(sum[0]!=sum[a])
-        {
-            check[i]=1;
-
-        }
-         a++;
-
-        for(j=0; j<size[i]; j++) //นอน
-        {
-            sum[a]=0;
-            for(k=0; k<size[i]; k++)
+            for(j=0,k=size[i]-1; j<size[i]; k--,j++)//ทแยงซ้าย
             {
                 sum[a]+=num[i][j][k];
 
             }
 
 
+
             if(sum[0]!=sum[a])
             {
                 check[i]=1;
 
             }
-
+            a++;
         }
-        a++;
-        for(j=0; j<size[i]; j++) //ตั้ง
-        {   sum[a]=0;
-
-            for(k=0; k<size[i]; k++)
+        if(check[i]!=1)
+        {
+            for(j=0; j<size[i]; j++) //นอน
             {
-                sum[a]+=num[i][k][j];
+                sum[a]=0;
+                for(k=0; k<size[i]; k++)
+                {
+                    sum[a]+=num[i][j][k];
+
+                }
+
+
+                if(sum[0]!=sum[a])
+                {
+                    check[i]=1;
+
+                }
 
             }
-            if(sum[0]!=sum[a])
-            {
-                check[i]=1;
+            a++;
 
-            }
 
         }
-        a++;
+        if(check[i]!=1)
+        {
+
+            for(j=0; j<size[i]; j++) //ตั้ง
+            {
+                sum[a]=0;
+
+                for(k=0; k<size[i]; k++)
+                {
+                    sum[a]+=num[i][k][j];
+
+                }
+                if(sum[0]!=sum[a])
+                {
+                    check[i]=1;
+
+                }
+
+            }
+            a++;
+
+        }
 
     }
+
     for(i=0; i<3; i++)
     {
         if(check[i]==1)
         {
-            printf("Yes\n");
+            printf("yes\n");
         }
         else
         {
-            printf("No\n");
+            printf("no\n");
         }
     }
 }
